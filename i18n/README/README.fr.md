@@ -25,7 +25,6 @@
 
 <div align="center">
 
-![Stars du dépôt GitHub](https://img.shields.io/github/stars/LinuxBeginnings/Hyprland-Dots?style=for-the-badge&color=cba6f7) ![Dernier commit GitHub](https://img.shields.io/github/last-commit/LinuxBeginnings/Hyprland-Dots?style=for-the-badge&color=b4befe) ![Taille du dépôt GitHub](https://img.shields.io/github/repo-size/LinuxBeginnings/Hyprland-Dots?style=for-the-badge&color=cba6f7) <a href="https://discord.gg/kool-tech-world"> <img src="https://img.shields.io/discord/1151869464405606400?style=for-the-badge&logo=discord&color=cba6f7&link=https%3A%2F%2Fdiscord.gg%kool-tech-world"> </a>
 
 <br/>
 </div>
@@ -233,21 +232,16 @@ chmod +x upgrade.sh
 
 - Vous pouvez aussi me supporter avec des cafés ou btc 😊
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/jakoolit)
 
 ou
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/LinuxBeginnings)
 
 Ou vous pouvez donner de la crypto sur mon portefeuille btc :)
 
-> 1N3MeV2dsX6gQB42HXU6MF2hAix1mqjo8i
 
-![Bitcoin](https://github.com/user-attachments/assets/7ed32f8f-c499-46f0-a53c-3f6fbd343699)
 
 ## 🫰 Merci pour les stars 🩷
 
-[![Stargazers over time](https://starchart.cc/LinuxBeginnings/Hyprland-Dots.svg?variant=adaptive)](https://starchart.cc/LinuxBeginnings/Hyprland-Dots)
 
 
 ### Traductions des documents
