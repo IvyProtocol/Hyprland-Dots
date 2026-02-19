@@ -415,6 +415,47 @@ printf "\n%.0s" {1..1}
 printf "${INFO} - Copying dotfiles ${SKY_BLUE}second${RESET} part\n"
 copy_phase2 "$LOG"
 printf "\\n%.0s" {1..1}
+# Non-express upgrades: copy waybar-weather config and optionally set units
+if [ "$UPGRADE_MODE" -eq 1 ] && [ "$EXPRESS_MODE" -eq 0 ]; then
+  WAYBAR_WEATHER_SRC="$DOTFILES_DIR/config/waybar-weather"
+  WAYBAR_WEATHER_DEST="$HOME/.config/waybar-weather"
+  if [ -d "$WAYBAR_WEATHER_SRC" ]; then
+    echo "${INFO} - Copying waybar-weather config for upgrade" 2>&1 | tee -a "$LOG"
+    mkdir -p "$WAYBAR_WEATHER_DEST"
+    cp -r "$WAYBAR_WEATHER_SRC/." "$WAYBAR_WEATHER_DEST/" 2>&1 | tee -a "$LOG"
+  else
+    echo "${WARN} - waybar-weather config not found at $WAYBAR_WEATHER_SRC" 2>&1 | tee -a "$LOG"
+  fi
+
+  while true; do
+    read -r -p "${CAT} Use Fahrenheit (F) or Celsius (C)? [C]: " WEATHER_UNITS
+    WEATHER_UNITS=$(echo "${WEATHER_UNITS}" | tr '[:upper:]' '[:lower:]')
+    case "$WEATHER_UNITS" in
+      f|fahrenheit)
+        WEATHER_CFG="$WAYBAR_WEATHER_DEST/config.toml"
+        if [ -f "$WEATHER_CFG" ]; then
+          if grep -qE '^[[:space:]]*units[[:space:]]*=' "$WEATHER_CFG"; then
+            sed -i 's/^[[:space:]]*units[[:space:]]*=.*/units = "imperial"/' "$WEATHER_CFG"
+          elif grep -qE '^[[:space:]]*#\s*units[[:space:]]*=' "$WEATHER_CFG"; then
+            sed -i 's/^[[:space:]]*#\s*units[[:space:]]*=.*/units = "imperial"/' "$WEATHER_CFG"
+          else
+            printf '\nunits = "imperial"\n' >> "$WEATHER_CFG"
+          fi
+          echo "${OK} - Set waybar-weather units to imperial" 2>&1 | tee -a "$LOG"
+        else
+          echo "${WARN} - waybar-weather config not found at $WEATHER_CFG" 2>&1 | tee -a "$LOG"
+        fi
+        break
+        ;;
+      c|celsius|"")
+        # Default config already uses metric; no change needed
+        break
+        ;;
+      *)
+        echo "${WARN} Please enter 'F' or 'C'." ;;
+    esac
+  done
+fi
 
 # ags config
 # Check if ags is installed

@@ -202,6 +202,7 @@ Choose Hyprland Animations
 Choose Monitor Profiles
 Choose Rofi Themes
 Search for Keybinds
+Toggle Waybar Weather units (C/F)
 Toggle Game Mode
 Switch Dark-Light Theme
 Rainbow Borders Mode
@@ -263,6 +264,7 @@ main() {
         "Choose Monitor Profiles") $scriptsDir/MonitorProfiles.sh ;;
         "Choose Rofi Themes") $scriptsDir/RofiThemeSelector.sh ;;
         "Search for Keybinds") $scriptsDir/KeyBinds.sh ;;
+        "Toggle Waybar Weather units (C/F)") $scriptsDir/Toggle-weather-waybar-units.sh ;;
         "Toggle Game Mode") $scriptsDir/GameMode.sh ;;
         "Switch Dark-Light Theme") $scriptsDir/DarkLight.sh ;;
         "Rainbow Borders Mode") rainbow_borders_menu ;;

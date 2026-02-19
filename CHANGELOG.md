@@ -2,7 +2,14 @@
 
 ## v2.3.21
 
-- Update look of `fastfetch` compact config file 
+- Updated `waybar-weather`
+  - Created default files in `.config/waybar-weather`
+    - You can manually override settings or providers
+    - The defaults should work for most users
+  - Added question during install to set `metric` or `imperial` Temp units
+  - Added Menu item is Quick Settings to toggle units
+    - Note: After changing units click on the weather widget to update units
+- Updated look of `fastfetch` compact config file
 - Fixed no tooltips when `waybar cava` running
   - Thank you Max Gangel for the fix!
 - Added check for `rsync` in `copy.sh`
