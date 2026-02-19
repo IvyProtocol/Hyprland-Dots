@@ -2,6 +2,7 @@
 
 ## v2.3.21
 
+- Update look of `fastfetch` compact config file 
 - Fixed no tooltips when `waybar cava` running
   - Thank you Max Gangel for the fix!
 - Added check for `rsync` in `copy.sh`
