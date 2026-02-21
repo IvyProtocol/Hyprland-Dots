@@ -25,14 +25,30 @@ IFS=$'\t' read -r __pid __class __title <<< "${PID}"
 
 [[ -z "${__pid}" ]] && { echo -e "Could not resolve PID for focused window."; exit 1; }
 sink_json="$(pactl -f json list sink-inputs 2>/dev/null | iconv -f utf-8 -t utf-8 -c || { echo -e "Did pactl or iconv fail to run? Required manual intervention."; exit 1; } )"
+#// Collect all descendant PIDs for the active window (Chrome/Wayland audio often runs in child processes).
+declare -A seen_pids=()
+queue=("${__pid}")
+all_pids=()
+while ((${#queue[@]})); do
+  pid="${queue[0]}"
+  queue=("${queue[@]:1}")
+  [[ -n "${seen_pids[$pid]:-}" ]] && continue
+  seen_pids["$pid"]=1
+  all_pids+=("$pid")
+  mapfile -t children < <(pgrep -P "$pid" || true)
+  for child in "${children[@]}"; do
+    [[ -n "${seen_pids[$child]:-}" ]] || queue+=("$child")
+  done
+done
+pidsJson="$(printf '%s\n' "${all_pids[@]}" | jq -s 'map(tonumber)')"
 
-#// Check if the __pid matches application.process.id or else verify other statements.
-mapfile -t sink_ids < <(jq -r --arg pid "${__pid}" --arg class "${__class}" --arg title "${__title}" '
+#// Check if any descendant PID matches application.process.id or else verify other statements.
+mapfile -t sink_ids < <(jq -r --argjson pids "${pidsJson}" --arg class "${__class}" --arg title "${__title}" '
 .[] |
  def lc(x): (x // "" | ascii_downcase);
   def normalize(x): x | gsub("[-_~.]+";" ") ;
   select(
-  (.properties["application.process.id"] // "") == $pid
+  (.properties["application.process.id"] | tostring | tonumber? as $p | $p != null and ($pids | index($p)))
   or
   (lc(.properties["application.name"]) | contains(lc($class)))
   or
@@ -45,10 +61,25 @@ mapfile -t sink_ids < <(jq -r --arg pid "${__pid}" --arg class "${__class}" --ar
 )
 
 if [[ "${#sink_ids[@]}" -eq 0 ]]; then
-  fallback_pid="$(pgrep -x "${__class}" | head -n 1 || true)"
-  if [[ -n "${fallback_pid}" ]]; then
-    mapfile -t sink_ids < <( jq -r --arg pid "${fallback_pid}" '.[] | 
-      select(.properties["application.process.id"] == $pid) | .index' <<< "${sink_json}" )
+  mapfile -t fallback_pids < <(pgrep -x "${__class}" || true)
+  if [[ "${#fallback_pids[@]}" -gt 0 ]]; then
+    declare -A seen_fallback=()
+    queue=("${fallback_pids[@]}")
+    all_fallback=()
+    while ((${#queue[@]})); do
+      pid="${queue[0]}"
+      queue=("${queue[@]:1}")
+      [[ -n "${seen_fallback[$pid]:-}" ]] && continue
+      seen_fallback["$pid"]=1
+      all_fallback+=("$pid")
+      mapfile -t children < <(pgrep -P "$pid" || true)
+      for child in "${children[@]}"; do
+        [[ -n "${seen_fallback[$child]:-}" ]] || queue+=("$child")
+      done
+    done
+    fallbackJson="$(printf '%s\n' "${all_fallback[@]}" | jq -s 'map(tonumber)')"
+    mapfile -t sink_ids < <( jq -r --argjson pids "${fallbackJson}" '.[] | 
+      select((.properties["application.process.id"] | tostring | tonumber? as $p | $p != null and ($pids | index($p)))) | .index' <<< "${sink_json}" )
   fi
 fi
 
@@ -85,13 +116,29 @@ fi
 
 [[ -f "${swayIcon}" ]] || echo -e "Missing swaync icons."
 
+changed=0
+failed_ids=()
 for id in "${sink_ids[@]}"; do
-  pactl set-sink-input-mute "$id" "$want_mute"
+  if pactl set-sink-input-mute "$id" "$want_mute"; then
+    changed=1
+  else
+    failed_ids+=("$id")
+  fi
 done
+
+if [[ "$changed" -eq 0 ]]; then
+  notify-send -a "t2" -r 91190 -t 1200 -i "${swayIconDir}/volume-low.png" "Failed to change sink input(s)" "${failed_ids[*]:-unknown}"
+  exit 1
+fi
 
 #// Append pamixer to get a nice result. Pamixer is complete optional here.
 if command -v pamixer >/dev/null; then
-  notify-send -a "t2" -r 91190 -t 800 -i "${swayIcon}" "${state_msg} ${__class}" "$(pamixer --get-default-sink | awk -F '"' 'END{print $(NF - 1)}')"
+  sink_name="$(pamixer --get-default-sink 2>/dev/null | awk -F '"' 'END{print $(NF - 1)}' 2>/dev/null || true)"
+  if [[ -n "${sink_name}" ]]; then
+    notify-send -a "t2" -r 91190 -t 800 -i "${swayIcon}" "${state_msg} ${__class}" "${sink_name}"
+  else
+    notify-send -a "t2" -r 91190 -t 800 -i "${swayIcon}" "${state_msg} ${__class}"
+  fi
 else
   notify-send -a "t2" -r 91190 -t 800 -i "${swayIcon}" "${state_msg} ${__class}"
 fi
