@@ -1,86 +1,66 @@
-/* ----------- 💫 https://github.com/LinuxBeginnings 💫 -------- */
-
+/**
+ *    ┏┓┏┓┏┓┏┳┓┏┓┏┓┏┳┓┏┓┓┏
+ *    ┣ ┣┫┗┓ ┃ ┣ ┣  ┃ ┃ ┣┫
+ *    ┻ ┛┗┗┛ ┻ ┻ ┗┛ ┻ ┗┛┛┗
+ *
+ */
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
     "logo": {
+        // "type": "auto",
+        // x."source": "~/.config/fastfetch/logo.png",
+        // "height": 10,
         "padding": {
-            "top": 2
+            "top": 3,
+            "right": 2
         },
         "type": "small"
     },
     "display": {
-        "separator": " -> "
+        "separator": " "
     },
     "modules": [
         "break",
+        "break",
+        "break",
+        "break",
         {
-            "type": "title",
-            "keyWidth": 10,
-			"format": "         {6}{7}{8}"
+            "type": "os",
+            "key": " ",
+            "keyColor": "31"
         },
-        {
-            "type": "custom",
-            "format": " ─────────────────────────── "
-        },    
         {
             "type": "kernel",
-            "key": " ",
-            "keyColor": "yellow"
+            "key": " ",
+            "keyColor": "32"
         },
         {
-            "keyColor": "blue",
-            "key": " ",
-            "text": "echo Jakoolit: v${DOTS_VERSION}",
-	    "type": "command"
+            "type": "shell",
+            "key": " ",
+            "keyColor": "34"
+        },
+        {
+            "type": "terminal",
+            "key": " ",
+            "keyColor": "35"
         },
         {
             "type": "wm",
             "key": " ",
-            "keyColor": "magenta"
-        },
-        {
-            "type": "shell",
-            "key": " ",
-            "keyColor": "yellow"
-        },
-        {
-            "type": "terminal",
-            "key": " ",
-            "keyColor": "blue"
-        },
-        /*
-        {
-            "type": "packages",
-            "key": "󰏖 ",
-            "keyColor": "yellow"
-        },
-        */
-        {
-            "type": "memory",
-            "key": "󰍛 ",
-            "keyColor": "magenta",
-            // format: used / total
-            "format": "{1} / {2}"
+            "keyColor": "36"
         },
         {
             "type": "uptime",
-            "key": "󰔛 ",
-            "keyColor": "green"
+            "key": " ",
+            "keyColor": "31"
         },
-        {
-            "type": "command",
-            "key": "󱦟 ",
-            "keyColor": "magenta",
-            "text": "echo $(( ($(date +%s) - $(stat -c %W /)) / 86400 )) days"
-        },
-        {
-            "type": "custom",
-            "format": " ─────────────────────────── "
-        },
-        {
-            "type": "custom",
-            "format": "   \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m  \u001b[90m "
-        },
-		"break"
+      {
+          "type": "command",
+          "key": " ",
+          "keyColor": "36",
+          "shell": "/bin/bash",
+          "text": "echo \"Jak's dotfiles: v$DOTS_VERSION\""
+      },
+        "break"
     ]
 }
