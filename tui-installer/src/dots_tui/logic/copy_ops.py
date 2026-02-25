@@ -118,22 +118,25 @@ def copy_waybar_with_merge(
 
     assert backup is not None
 
-    # If previous config/style.css were symlinks, copy their targets into new files.
+    # Preserve config and style.css
+    # Re-create the exact same symlink after the new waybar config is installed
     for rel in ["config", "style.css"]:
         old = backup / rel
         new = dst / rel
-        if old.is_symlink():
-            try:
-                target = old.resolve(strict=True)
-            except FileNotFoundError:
-                continue
-            if target.is_file():
-                try:
-                    if new.exists() or new.is_symlink():
-                        new.unlink()
-                    shutil.copy2(target, new)
-                except OSError:
-                    pass
+        if not old.is_symlink():
+            continue
+        link_target = old.readlink()  # keep the original symlink target as-is
+        try:
+            if new.exists() or new.is_symlink():
+                new.unlink()
+        except OSError as e:
+            log(f"[WARN] - Could not remove waybar/{rel} before restore: {e}")
+            continue
+        try:
+            new.symlink_to(link_target)
+            log(f"[OK] - Preserved waybar/{rel} symlink → {link_target}")
+        except OSError as e:
+            log(f"[WARN] - Could not recreate waybar/{rel} symlink → {link_target}: {e}")
 
     # Merge missing configs/
     old_configs = backup / "configs"
