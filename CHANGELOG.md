@@ -1,4 +1,4 @@
-# Changelog — JAK's Hyprland Dotfiles
+# Changelog — KoolDots
 
 ## v2.3.22
 
@@ -16,9 +16,9 @@
 - Changed `fastfetch` dotfiles name to `KoolDots`
 - ENVvariables file had both QT5CT and QT6CT variables
   `     #Added style ENV for kvantum
-    env = QT_QPA_PLATFORMTHEME,qt6ct
-    env = QT_STYLE_OVERRIDE,kvantum
-    `
+  env = QT_QPA_PLATFORMTHEME,qt6ct
+  env = QT_STYLE_OVERRIDE,kvantum
+  `
   > Note: Not sure how will this will work as I don't normally use kvantum
 
 ## v2.3.21
