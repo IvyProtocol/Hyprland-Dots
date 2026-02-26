@@ -450,7 +450,6 @@ restore_user_configs() {
               echo "${NOTE:-[NOTE]} - Skipped restoring $FILE_NAME." 2>&1 | tee -a "$log"
             fi
           fi
-          fi
         fi
       done
     fi
