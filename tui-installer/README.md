@@ -1,6 +1,6 @@
-# Hyprland-Dots TUI Installer
+# KoolDots TUI Installer
 
-Python/Textual TUI installer intended to replace the legacy bash installer flow for the [Hyprland-Dots](https://github.com/prasanthrangan/hyprdots) repository.
+Python/Textual TUI installer intended to replace the legacy bash installer flow for the [KoolDots](https://github.com/prasanthrangan/hyprdots) repository.
 
 ## Features
 

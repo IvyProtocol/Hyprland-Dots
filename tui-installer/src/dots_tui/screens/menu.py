@@ -82,7 +82,7 @@ class MenuScreen(Screen[None]):
 
     def compose(self):
         yield Container(
-            Static("KooL's Hyprland-Dots", id="title"),
+            Static("KoolDots", id="title"),
             Button("Install", id="install", variant="success"),
             Button("Upgrade", id="upgrade"),
             Button("Express", id="express"),

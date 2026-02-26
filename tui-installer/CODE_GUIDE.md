@@ -1,4 +1,4 @@
-# Codebase Guide: Hyprland-Dots TUI Installer
+# Codebase Guide: KoolDots TUI Installer
 
 --- (AI Generated) ---
 --- This must be deleted after testing ---

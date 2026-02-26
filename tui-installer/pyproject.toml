@@ -1,7 +1,7 @@
 [project]
 name = "dots-tui"
 version = "2.3.20"
-description = "Textual TUI installer for Hyprland-Dots"
+description = "Textual TUI installer for KoolDots"
 requires-python = ">=3.11"
 dependencies = [
     "rich-argparse>=1.7.2",

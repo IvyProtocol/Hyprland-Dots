@@ -1,1 +1,1 @@
-"""Hyprland-Dots TUI installer package."""
+"""KoolDots TUI installer package."""

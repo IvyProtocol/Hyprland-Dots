@@ -194,7 +194,7 @@ class InstallerOrchestrator:
         set_step: Callable[[str, int | None], None],
     ) -> None:
         self._assert_repo_root()
-        expected_name = "Hyprland-Dots"
+        expected_name = "KoolDots"
         if self.repo_root.name != expected_name:
             raise RuntimeError(
                 f"This helper must be run from the {expected_name} directory. Current: {self.repo_root}"

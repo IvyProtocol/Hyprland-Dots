@@ -16,7 +16,7 @@ StartMode = RunMode | Literal["update"]
 
 
 class InstallerApp(App[None]):
-    TITLE = "Hyprland-Dots Installer"
+    TITLE = "KoolDots Installer"
     CSS_PATH = "installer.tcss"
 
     def __init__(
@@ -40,7 +40,7 @@ class InstallerApp(App[None]):
     def on_mount(self) -> None:
         # Log startup info if verbose mode is enabled
         if self._verbose:
-            self.log.info("Starting Hyprland-Dots Installer")
+            self.log.info("Starting KoolDots Installer")
             self.log.info(f"  dry_run: {self._dry_run}")
             self.log.info(f"  start: {self._start}")
             self.log.info(f"  verbose: {self._verbose}")

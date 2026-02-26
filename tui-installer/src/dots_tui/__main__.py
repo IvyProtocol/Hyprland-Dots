@@ -12,7 +12,7 @@ from dots_tui.app import run
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="dots_tui",
-        description="[bold blue]Hyprland-Dots[/bold blue] [magenta]TUI Installer[/magenta]",
+        description="[bold blue]KoolDots[/bold blue] [magenta]TUI Installer[/magenta]",
         formatter_class=RichHelpFormatter,
     )
     parser.add_argument(
