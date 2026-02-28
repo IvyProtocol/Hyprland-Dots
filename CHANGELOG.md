@@ -2,6 +2,14 @@
 
 ## v2.3.22
 
+- Updated `ChangeLayout` script for scrolling 
+  - Requires Hyprland v0.54+ 
+- Added two keybinds for scrolling layout as a start 
+  - SUPERSHIFT + comma swap columns
+  - SUPERSHIFT + period move to next column
+- Updated `togglesplit` to `layoutmsg,togglesplit`
+  - Has been depreciated, w/0.54 it's not supported
+    - No errors just doesn't work 
 - Fixed many of the WALLUST based waybars color issues
   - Foreground/background colors were same light color
 - Kitty now has a "No color" theme option
