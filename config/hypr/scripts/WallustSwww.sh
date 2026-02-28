@@ -116,6 +116,7 @@ wallust run -s "$wallpaper_path" || true
 wallust_targets=(
   "$HOME/.config/waybar/wallust/colors-waybar.css"
   "$HOME/.config/rofi/wallust/colors-rofi.rasi"
+  "$HOME/.config/hypr/wallust/wallust-hyprland.conf"
 )
 wait_for_templates "$start_ts" "${wallust_targets[@]}" || true
 
@@ -163,10 +164,8 @@ done
 if pidof ghostty >/dev/null; then
   for pid in $(pidof ghostty); do kill -SIGUSR2 "$pid" 2>/dev/null || true; done
 fi
-
-# Prompt Waybar to reload colors
-if command -v waybar-msg >/dev/null 2>&1; then
-  waybar-msg cmd reload >/dev/null 2>&1 || true
-elif pidof waybar >/dev/null; then
-  killall -SIGUSR2 waybar 2>/dev/null || true
+# Reload Hyprland so new border colors from wallust-hyprland.conf take effect
+if command -v hyprctl >/dev/null 2>&1; then
+  hyprctl reload >/dev/null 2>&1 || true
+fi
 fi
