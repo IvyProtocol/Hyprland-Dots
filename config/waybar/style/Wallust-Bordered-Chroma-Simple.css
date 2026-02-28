@@ -177,14 +177,14 @@ tooltip {
 }
 
 #custom-power {
-    color: red;
+    color: @color13;
     padding-left: 10px;
 	padding-right: 2px;
-	border: 2px solid red;
+	border: 2px solid @color13;
 }
 
 #backlight {
-    color: #f9e2af;
+    color: @color14;
     padding-right: 5px;
 }
 
@@ -213,29 +213,29 @@ tooltip {
 }
 
 #clock {
-    color: #fab387;
+    color: @color13;
 }
 
 
 #bluetooth {
-    color: #b4befe;
+    color: @color12;
     margin-right: 10px
 } 
 
 #pulseaudio.microphone,
 #pulseaudio {
     background-color: @color12;
-    color: #89b4fa;
+    color: @color15;
 	border: 2px solid @color13;
 }
 
 #pulseaudio.muted {
-    color: #f38ba8;
+    color: @color13;
     padding-right: 20px;
 }
 
 #battery {
-    color: #a6e3a1;
+    color: @color10;
     margin-right: 5px;
     padding-right: 15px;
 	border: 2px solid @color14;
@@ -249,22 +249,22 @@ tooltip {
 }
 
 #battery.good {
-    color: #ffd57a;
+    color: @color14;
 	border: 2px solid @color15;
 }
 
 #battery.warning {
-    color: #fab387;
+    color: @color13;
     border-left: 0px;
 	border: 2px solid @color12;
 }
 
 #battery.charging {
-    color: #a6e3a1;
+    color: @color10;
 }
 
 #battery.critical {
-    color: #f38ba8;
+    color: @color13;
     border-left: 0px;
 	border: 2px solid @color8;
 }
@@ -287,7 +287,7 @@ tooltip {
 }
 
 #custom-weather {
-    color: #8eacf3;
+    color: @color12;
     border-right: 0px;
     margin-left: 0px;
     margin-right: 5px;
