@@ -151,6 +151,19 @@ tooltip {
 	border: 2px solid @color13;
 }
 
+/* Ensure group drawer modules match base style (avoid bright per-module colors) */
+#group-audio #pulseaudio,
+#group-audio #pulseaudio.microphone,
+#group-mobo_drawer #temperature,
+#group-mobo_drawer #cpu,
+#group-mobo_drawer #power-profiles-daemon,
+#group-mobo_drawer #memory,
+#group-mobo_drawer #disk {
+    background: @background;
+    color: @color12;
+    border: 2px solid @color13;
+}
+
 #cpu {
     border: 2px solid @color5;
 	color: @foreground;
