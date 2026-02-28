@@ -2,14 +2,18 @@
 
 ## v2.3.22
 
-- Updated `ChangeLayout` script for scrolling 
-  - Requires Hyprland v0.54+ 
-- Added two keybinds for scrolling layout as a start 
+- Improving wallpaper based theming
+  - More consistent results
+  - Reducing the time to make change effective
+- Fixed several waybar style files with inconsitent colors
+- Updated `ChangeLayout` script for scrolling
+  - Requires Hyprland v0.54+
+- Added two keybinds for scrolling layout as a start
   - SUPERSHIFT + comma swap columns
   - SUPERSHIFT + period move to next column
 - Updated `togglesplit` to `layoutmsg,togglesplit`
   - Has been depreciated, w/0.54 it's not supported
-    - No errors just doesn't work 
+    - No errors just doesn't work
 - Fixed many of the WALLUST based waybars color issues
   - Foreground/background colors were same light color
 - Kitty now has a "No color" theme option
@@ -23,10 +27,9 @@
   - TokyoNight
 - Changed `fastfetch` dotfiles name to `KoolDots`
 - ENVvariables file had both QT5CT and QT6CT variables
-  `     #Added style ENV for kvantum
-  env = QT_QPA_PLATFORMTHEME,qt6ct
-  env = QT_STYLE_OVERRIDE,kvantum
-  `
+  `    #Added style ENV for kvantum
+env = QT_QPA_PLATFORMTHEME,qt6ct
+env = QT_STYLE_OVERRIDE,kvantum`
   > Note: Not sure how will this will work as I don't normally use kvantum
 
 ## v2.3.21
