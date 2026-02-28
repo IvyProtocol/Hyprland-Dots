@@ -120,6 +120,24 @@ wallust_targets=(
 )
 wait_for_templates "$start_ts" "${wallust_targets[@]}" || true
 
+# Normalize Rofi selection colors to a brighter accent and readable foreground
+rofi_colors="$HOME/.config/rofi/wallust/colors-rofi.rasi"
+if [ -f "$rofi_colors" ]; then
+  accent_hex=$(sed -n 's/^\s*color13:\s*\(#[0-9A-Fa-f]\{6\}\).*/\1/p' "$rofi_colors" | head -n1)
+  [ -z "$accent_hex" ] && accent_hex=$(sed -n 's/^\s*color12:\s*\(#[0-9A-Fa-f]\{6\}\).*/\1/p' "$rofi_colors" | head -n1)
+  fg_hex=$(sed -n 's/^\s*foreground:\s*\(#[0-9A-Fa-f]\{6\}\).*/\1/p' "$rofi_colors" | head -n1)
+  if [ -n "$accent_hex" ]; then
+    sed -i -E "s|^(\s*selected-normal-background:\s*).*$|\1$accent_hex;|" "$rofi_colors"
+    sed -i -E "s|^(\s*selected-active-background:\s*).*$|\1$accent_hex;|" "$rofi_colors"
+    sed -i -E "s|^(\s*selected-urgent-background:\s*).*$|\1$accent_hex;|" "$rofi_colors"
+  fi
+  if [ -n "$fg_hex" ]; then
+    sed -i -E "s|^(\s*selected-normal-foreground:\s*).*$|\1$fg_hex;|" "$rofi_colors"
+    sed -i -E "s|^(\s*selected-active-foreground:\s*).*$|\1$fg_hex;|" "$rofi_colors"
+    sed -i -E "s|^(\s*selected-urgent-foreground:\s*).*$|\1$fg_hex;|" "$rofi_colors"
+  fi
+fi
+
 # Run kitty-only wallust config to keep terminal palette separate
 run_wallust_with_config() {
   local cfg="$1"

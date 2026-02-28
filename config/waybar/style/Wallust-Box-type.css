@@ -51,8 +51,8 @@ window#waybar.empty #window {
 
 #taskbar button.active,
 #workspaces button.active {
-  color: @color15;
-  background-color: @background;
+  color: @background;
+  background-color: @color13;
   padding-left: 4px;
   padding-right: 8px;
   animation: gradient_f 20s ease-in infinite;
@@ -61,8 +61,8 @@ window#waybar.empty #window {
 
 #taskbar button.focused,
 #workspaces button.focused {
-  color: @color15;
-  background-color: @background;
+  color: @background;
+  background-color: @color13;
 }
 
 #workspaces button.urgent {
@@ -72,7 +72,8 @@ window#waybar.empty #window {
 
 #taskbar button:hover,
 #workspaces button:hover {
-  color: @color15;
+  color: @background;
+  background-color: @color13;
   padding-left: 2px;
   padding-right: 8px;
   animation: gradient_f 20s ease-in infinite;
