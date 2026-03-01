@@ -11,6 +11,8 @@
 - Added two keybinds for scrolling layout as a start
   - SUPERSHIFT + comma swap columns
   - SUPERSHIFT + period move to next column
+  - SUPERALT + H Horizonal Scrolling
+  - SUPERALT + V Vertical Scrolling
 - Updated `togglesplit` to `layoutmsg,togglesplit`
   - Has been depreciated, w/0.54 it's not supported
     - No errors just doesn't work
